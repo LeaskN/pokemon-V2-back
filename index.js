@@ -14,6 +14,7 @@ app.get('/', (request, response) => {
 });
 
 app.get('/pokemon', db.getAllPokemon);
+app.post('/pokemon', db.addPokemon);
 
 app.listen(port, () => {
   console.log(`App running on port: ${port}`)

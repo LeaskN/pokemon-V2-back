@@ -16,6 +16,20 @@ const getAllPokemon = (request, response) => {
   })
 }
 
+const addPokemon = (request, response) => {
+  const { name, nickname, type, img } = request.body;
+
+  pool.query(`INSERT INTO pokemon (name, nickname, type, img) VALUES ($1, $2, $3, $4) RETURNING *`, 
+  [name, nickname, type, img], (error, results) => {
+    if(error){
+      throw error;
+    }
+    response.status(200).json(results.rows)
+  });
+
+}
+
 module.exports = {
-  getAllPokemon
+  getAllPokemon,
+  addPokemon
 }
